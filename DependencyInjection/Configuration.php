@@ -23,7 +23,6 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('cache_dir')->cannotBeEmpty()->defaultValue('%kernel.cache_dir%/toa_apc')->end()
-                ->scalarNode('prefix')->cannotBeEmpty()->defaultValue('user')->end()
             ->end();
 
         return $treeBuilder;

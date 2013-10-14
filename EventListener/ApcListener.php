@@ -4,22 +4,25 @@ namespace Toa\Bundle\ApcBundle\EventListener;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Symfony\Component\HttpKernel\Event\PostResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 
+/**
+ * ApcListener
+ *
+ * @author Enrico Thies <enrico.thies@gmail.com>
+ */
 class ApcListener implements EventSubscriberInterface
 {
     /** @var string */
     private $cacheDir;
 
-    /** @var string */
-    private $prefix;
-
-    public function __construct($cacheDir, $prefix)
+    /**
+     * @param string $cacheDir
+     */
+    public function __construct($cacheDir)
     {
         $this->cacheDir = $cacheDir;
-        $this->prefix = $prefix;
     }
 
     /**
@@ -37,13 +40,13 @@ class ApcListener implements EventSubscriberInterface
             return;
         }
 
-        if (file_exists($this->cacheDir . DIRECTORY_SEPARATOR . $this->prefix)) {
+        if (file_exists($this->cacheDir . DIRECTORY_SEPARATOR . 'user')) {
             return;
         }
 
-        apc_clear_cache($this->prefix);
+        apc_clear_cache('user');
 
-        file_put_contents($this->cacheDir . DIRECTORY_SEPARATOR . $this->prefix, time());
+        file_put_contents($this->cacheDir . DIRECTORY_SEPARATOR . 'user', time());
     }
 
     /**

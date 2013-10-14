@@ -29,7 +29,6 @@ class ToaApcExtension extends Extension
             }
         }
         $container->setParameter('toa_apc.cache_dir', $cacheDir);
-        $container->setParameter('toa_apc.prefix', $container->getParameterBag()->resolveValue($config['prefix']));
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
