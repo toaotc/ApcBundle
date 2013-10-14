@@ -22,15 +22,19 @@ class ToaApcExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $cacheDir = $container->getParameterBag()->resolveValue($config['cache_dir']);
-        if (!is_dir($cacheDir)) {
-            if (false === @mkdir($cacheDir, 0777, true)) {
-                throw new \RuntimeException(sprintf('Could not create cache directory "%s".', $cacheDir));
-            }
-        }
-        $container->setParameter('toa_apc.cache_dir', $cacheDir);
+        $autoClear = $container->getParameterBag()->resolveValue($config['clear_on_cache_warmup']);
 
-        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.xml');
+        if ($autoClear) {
+            $cacheDir = $container->getParameterBag()->resolveValue($config['cache_dir']);
+            if (!is_dir($cacheDir)) {
+                if (false === @mkdir($cacheDir, 0777, true)) {
+                    throw new \RuntimeException(sprintf('Could not create cache directory "%s".', $cacheDir));
+                }
+            }
+            $container->setParameter('toa_apc.cache_dir', $cacheDir);
+
+            $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+            $loader->load('listeners.xml');
+        }
     }
 }
