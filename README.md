@@ -23,19 +23,3 @@ Register the bundle in `app/AppKernel.php`:
             new Toa\Bundle\ApcBundle\ToaApcBundle(),
         );
     }
-
-## Configuration ##
-
-Set the bundle's configuration in `app/config/config.yml`:
-
-    # app/config/config.yml
-    toa_apc:
-        prefix: sf2 #default
-
-The `toa_apc.prefix` must be the same you set in `web/app.php`:
-
-    // web/app.php
-    // ...
-    $loader = new ApcClassLoader('sf2', $loader);
-    $loader->register(true);
-    // ...
