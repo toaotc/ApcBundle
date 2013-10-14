@@ -1,0 +1,27 @@
+{
+	"name" : "toa/apc-bundle",
+	"description" : "Apc Bundle for Symfony2",
+	"type" : "symfony-bundle",
+	"authors" : [{
+			"name" : "Enrico Thies",
+			"email" : "enrico.thies@gmail.com"
+		}
+	],
+	"keywords" : [
+		"clear apc cache"
+	],
+	"homepage" : "https://github.com/toaotc/ApcBundle",
+	"license" : [
+		"MIT"
+	],
+	"require" : {
+		"symfony/framework-bundle" : "~2.1"
+	},
+	"autoload" : {
+		"psr-0" : {
+			"Toa\\Bundle\\ApcBundle" : ""
+		}
+	},
+	"target-dir" : "Toa/Bundle/ApcBundle",
+	"minimum-stability" : "dev"
+}
