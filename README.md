@@ -1,7 +1,7 @@
 ToaApcBundle
 ============
 
-This Bundle clears the APC cache on the very request after cache warmup.
+This Bundle clears the APC cache on the very first request after cache warmup.
 
 ## Installation ##
 
