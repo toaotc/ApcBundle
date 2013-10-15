@@ -30,4 +30,4 @@ Set the bundle's configuration in `app/config/config.yml`:
 
     # app/config/config.yml
     toa_apc:
-        clear_on_cache_warmup: false #default
+        auto_clear: false #default

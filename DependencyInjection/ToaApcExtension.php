@@ -22,7 +22,7 @@ class ToaApcExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $autoClear = $container->getParameterBag()->resolveValue($config['clear_on_cache_warmup']);
+        $autoClear = $container->getParameterBag()->resolveValue($config['auto_clear']);
 
         if ($autoClear) {
             $cacheDir = $container->getParameterBag()->resolveValue($config['cache_dir']);
