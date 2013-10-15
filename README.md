@@ -30,4 +30,6 @@ Set the bundle's configuration in `app/config/config.yml`:
 
     # app/config/config.yml
     toa_apc:
-        auto_clear: false #default
+        auto_clear:
+            opcode: true # system cache
+            user:   true # user cache

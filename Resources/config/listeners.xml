@@ -11,6 +11,8 @@
     <services>
         <service id="toa_apc.apc_listener" class="%toa_apc.apc_listener.class%">
             <argument>%toa_apc.cache_dir%</argument>
+            <argument>%toa_apc.auto_clear.user%</argument>
+            <argument>%toa_apc.auto_clear.opcode%</argument>
             <tag name="kernel.event_subscriber" />
         </service>
     </services>

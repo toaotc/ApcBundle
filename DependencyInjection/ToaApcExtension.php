@@ -32,6 +32,8 @@ class ToaApcExtension extends Extension
                 }
             }
             $container->setParameter('toa_apc.cache_dir', $cacheDir);
+            $container->setParameter('toa_apc.auto_clear.user', $config['auto_clear']['user']);
+            $container->setParameter('toa_apc.auto_clear.opcode', $config['auto_clear']['opcode']);
 
             $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
             $loader->load('listeners.xml');

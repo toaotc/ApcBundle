@@ -17,12 +17,22 @@ class ApcListener implements EventSubscriberInterface
     /** @var string */
     private $cacheDir;
 
+    /** @var boolean */
+    private $clearUser;
+
+    /** @var boolean */
+    private $clearOpcode;
+
     /**
-     * @param string $cacheDir
+     * @param string  $cacheDir
+     * @param boolean $clearUser
+     * @param boolean $clearOpcode
      */
-    public function __construct($cacheDir)
+    public function __construct($cacheDir, $clearUser = false, $clearOpcode = false)
     {
         $this->cacheDir = $cacheDir;
+        $this->clearUser = $clearUser;
+        $this->clearOpcode = $clearOpcode;
     }
 
     /**
@@ -32,6 +42,10 @@ class ApcListener implements EventSubscriberInterface
      */
     public function onKernelRequest(GetResponseEvent $event)
     {
+        if (!$this->clearUser && !$this->clearOpcode) {
+            return;
+        }
+
         if (HttpKernelInterface::MASTER_REQUEST != $event->getRequestType()) {
             return;
         }
@@ -40,13 +54,15 @@ class ApcListener implements EventSubscriberInterface
             return;
         }
 
-        if (file_exists($this->cacheDir . DIRECTORY_SEPARATOR . 'user')) {
-            return;
+        if ($this->clearUser && !file_exists($this->cacheDir . DIRECTORY_SEPARATOR . 'user')) {
+            apc_clear_cache('user');
+            file_put_contents($this->cacheDir . DIRECTORY_SEPARATOR . 'user', date('r'));
         }
 
-        apc_clear_cache('user');
-
-        file_put_contents($this->cacheDir . DIRECTORY_SEPARATOR . 'user', time());
+        if ($this->clearOpcode && !file_exists($this->cacheDir . DIRECTORY_SEPARATOR . 'opcode')) {
+            apc_clear_cache('opcode');
+            file_put_contents($this->cacheDir . DIRECTORY_SEPARATOR . 'opcode', date('r'));
+        }
     }
 
     /**

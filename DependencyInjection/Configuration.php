@@ -23,7 +23,15 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('cache_dir')->cannotBeOverwritten(false)->defaultValue('%kernel.cache_dir%/toa_apc')->end()
-                ->booleanNode('auto_clear')->cannotBeEmpty()->defaultFalse()->end()
+                ->arrayNode('auto_clear')
+                    ->treatFalseLike(array('user' => false, 'opcode' => false))
+                    ->treatTrueLike(array('user' => true, 'opcode' => true))
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->booleanNode('user')->defaultFalse()->end()
+                        ->booleanNode('opcode')->defaultFalse()->end()
+                    ->end()
+                ->end()
             ->end();
 
         return $treeBuilder;
