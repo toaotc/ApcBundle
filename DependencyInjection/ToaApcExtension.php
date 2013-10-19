@@ -24,7 +24,7 @@ class ToaApcExtension extends Extension
 
         $autoClear = $container->getParameterBag()->resolveValue($config['auto_clear']);
 
-        if ($autoClear) {
+        if (true == $autoClear['user'] || true == $autoClear['opcode']) {
             $cacheDir = $container->getParameterBag()->resolveValue($config['cache_dir']);
             if (!is_dir($cacheDir)) {
                 if (false === @mkdir($cacheDir, 0777, true)) {
