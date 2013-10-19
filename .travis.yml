@@ -14,7 +14,6 @@ env:
 before_script:
   - sudo apt-get update
   - sudo apt-get install -y php-apc
-  - composer require symfony/framework-bundle:${SYMFONY_VERSION} --no-update
-  - composer require --dev php-ffmpeg/php-ffmpeg:* goodby/csv:*
+  - composer require symfony/framework-bundle:${SYMFONY_VERSION} --dev
 
 script: phpunit --coverage-text
