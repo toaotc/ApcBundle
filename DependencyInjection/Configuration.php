@@ -28,8 +28,8 @@ class Configuration implements ConfigurationInterface
                     ->treatTrueLike(array('user' => true, 'opcode' => true))
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->booleanNode('user')->defaultFalse()->end()
-                        ->booleanNode('opcode')->defaultFalse()->end()
+                        ->booleanNode('user')->treatNullLike(false)->defaultFalse()->end()
+                        ->booleanNode('opcode')->treatNullLike(false)->defaultFalse()->end()
                     ->end()
                 ->end()
             ->end();
