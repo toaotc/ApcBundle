@@ -22,6 +22,10 @@ class AutoClearListenerTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
+        if ((!extension_loaded('apc'))) {
+            $this->markTestSkipped('Apc is not loaded');
+        }
+
         $this->cacheDir = sys_get_temp_dir();
         @unlink($this->cacheDir . DIRECTORY_SEPARATOR . 'user');
         @unlink($this->cacheDir . DIRECTORY_SEPARATOR . 'opcode');
