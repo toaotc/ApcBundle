@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
  *
  * @author Enrico Thies <enrico.thies@gmail.com>
  */
-class ApcListener implements EventSubscriberInterface
+class AutoClearListener implements EventSubscriberInterface
 {
     /** @var string */
     private $cacheDir;
